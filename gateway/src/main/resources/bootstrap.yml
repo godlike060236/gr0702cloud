@@ -1,0 +1,13 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: gateway,regist
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.119.22:8848
+        prefix: gr
+        file-extension: yml

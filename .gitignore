@@ -1,0 +1,7 @@
+# Project exclude paths
+/admin/target/
+/bus/target/
+/gateway/target/
+/generator/target/
+/pojo/target/
+/product/target/
