@@ -1,8 +1,11 @@
 package com.gr.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.gr.pojo.BasePojo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 /**
  * <p>
@@ -38,5 +41,11 @@ public class PmsCategory extends BasePojo {
      */
     private Integer active;
 
+    /**
+     * 子分类
+     *
+     * */
+    @TableField(exist = false)
+    private List<PmsCategory> children;
 
 }
