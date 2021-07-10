@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.gr.pojo.PmsBrand;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 品牌表 服务类
@@ -14,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IPmsBrandService extends IService<PmsBrand> {
     IPage<PmsBrand> page(Integer pageNo,Integer pageSize,String name);
+    List<PmsBrand> getAll();
 }

@@ -62,7 +62,7 @@ public class MybatisGenerator {
         // 公共父类
         // 写于父类中的公共字段
         strategy.setSuperEntityColumns("id");
-        strategy.setInclude("pms_sku");
+        strategy.setInclude("pms_product");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

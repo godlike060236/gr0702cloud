@@ -15,4 +15,5 @@ import java.util.List;
  */
 public interface IPmsCategoryService extends IService<PmsCategory> {
     List<PmsCategory> getByParentId(Long parentId);
+    List<PmsCategory> getAll(Long parentId);
 }

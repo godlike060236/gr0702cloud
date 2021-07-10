@@ -34,9 +34,9 @@ public class UserFilter implements GlobalFilter, Ordered {
             JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256("guorui")).build();
             DecodedJWT verify = jwtVerifier.verify(token);
             String username = verify.getClaim("username").asString();
-            System.out.println("当前登录用户:" + username);
+            // System.out.println("当前登录用户:" + username);
             List<String> backUrl = verify.getClaim("backUrl").asList(String.class);
-            System.out.println("具有的后端权限:" + backUrl);
+            // System.out.println("具有的后端权限:" + backUrl);
             // 从request拿到当前请求地址
         }
         return chain.filter(exchange);

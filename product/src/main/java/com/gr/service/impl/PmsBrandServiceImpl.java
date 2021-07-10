@@ -10,6 +10,8 @@ import com.gr.service.IPmsBrandService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 品牌表 服务实现类
@@ -28,5 +30,12 @@ public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper, PmsBrand> i
             wrapper.like("name", name);
         }
         return this.page(new Page<>(pageNo,pageSize),wrapper);
+    }
+
+    @Override
+    public List<PmsBrand> getAll() {
+        QueryWrapper<PmsBrand> wrapper = new QueryWrapper<>();
+        wrapper.eq("active",1);
+        return this.list(wrapper);
     }
 }
