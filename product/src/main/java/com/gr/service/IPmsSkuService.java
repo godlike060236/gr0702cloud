@@ -15,4 +15,5 @@ import java.util.List;
  */
 public interface IPmsSkuService extends IService<PmsSku> {
     List<PmsSku> list(Long categoryId);
+    List<PmsSku> getByCategory(Long[] categoryIds);
 }

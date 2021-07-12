@@ -50,15 +50,9 @@ public class PmsSpuController {
         return ResultJson.success(spuService.removeById(id), "删除属性成功");
     }
 
-    /*
-     *
-     * TODO 2021-07-09 17:53:12 spu级联选择框的问题
-     *
-     */
     @GetMapping("/getByCategory")
     ResultJson getByCategory(Long[] categoryIds) {
         return ResultJson.success(spuService.getByCategory(categoryIds));
     }
-
 
 }
