@@ -2,7 +2,6 @@ package com.gr.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gr.pojo.PmsProduct;
 import com.gr.pojo.PmsSkuValue;
 import com.gr.pojo.PmsSpuValue;
@@ -55,8 +54,8 @@ public class PmsProductController {
     IPmsStockService stockService;
 
     @GetMapping("/list")
-    ResultJson list(Integer pageNo, Integer pageSize) {
-        return ResultJson.success(productService.page(new Page<>(pageNo, pageSize)));
+    ResultJson list(Integer pageNo, Integer pageSize, String name) {
+        return ResultJson.success(productService.page(pageNo, pageSize, name));
     }
 
     @GetMapping("/getData")
@@ -81,10 +80,10 @@ public class PmsProductController {
         pmsProduct.setImg(adminService.upload(file));
         List<String> piclist = new ArrayList<>();
         for (MultipartFile f : files) {
-            MultipartFile tempFile = new MockMultipartFile("file",f.getOriginalFilename(),f.getContentType(),f.getBytes());
+            MultipartFile tempFile = new MockMultipartFile("file", f.getOriginalFilename(), f.getContentType(), f.getBytes());
             piclist.add(adminService.upload(tempFile));
         }
-        pmsProduct.setPics(piclist.toString().replaceAll("\\[", "").replaceAll("\\]", ""));
+        pmsProduct.setPics(piclist.toString().replaceAll("\\[", " ").replaceAll("\\]", " "));
 
         productService.save(pmsProduct);
         List<PmsSpuValue> spuValueList = new ArrayList<>();
@@ -112,7 +111,7 @@ public class PmsProductController {
     }
 
     @GetMapping("/getone")
-    ResultJson getone(Long id){
+    ResultJson getone(Long id) {
         return ResultJson.success(productService.getById(id));
     }
 }

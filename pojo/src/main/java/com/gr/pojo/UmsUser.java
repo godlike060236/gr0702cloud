@@ -26,6 +26,11 @@ public class UmsUser extends BasePojo {
     private String loginName;
 
     /**
+     * 昵称
+     */
+    private String nickyName;
+
+    /**
      * 密码
      */
     @JsonIgnore

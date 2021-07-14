@@ -1,8 +1,8 @@
 server:
-  port: 8084
+  port: 8809
 spring:
   application:
-    name: admin
+    name: cart
   profiles:
     active: datasource,regist,mybatis,minio
   cloud:

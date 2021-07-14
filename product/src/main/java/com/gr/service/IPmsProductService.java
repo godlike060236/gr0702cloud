@@ -1,7 +1,8 @@
 package com.gr.service;
 
-import com.gr.pojo.PmsProduct;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gr.pojo.PmsProduct;
 
 /**
  * <p>
@@ -12,5 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-07-09
  */
 public interface IPmsProductService extends IService<PmsProduct> {
+    IPage<PmsProduct> page(Integer pageNo, Integer pageSize, String name);
 
 }

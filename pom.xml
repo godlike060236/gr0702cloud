@@ -14,6 +14,7 @@
         <module>product</module>
         <module>bus</module>
         <module>gateway</module>
+        <module>cart</module>
     </modules>
     <packaging>pom</packaging>
 

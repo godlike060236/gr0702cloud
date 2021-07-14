@@ -78,4 +78,9 @@ public class UmsUserController {
     ResultJson login(String username,String password) throws Exception {
         return ResultJson.success(umsUserService.login(username,password),"登陆成功");
     }
+
+    @PostMapping("/customerLogin")
+    ResultJson customerLogin(String username,String password) throws Exception {
+        return ResultJson.success(umsUserService.customerLogin(username,password),"登陆成功");
+    }
 }

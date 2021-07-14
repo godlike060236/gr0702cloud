@@ -102,4 +102,31 @@ public class UmsUserServiceImpl extends ServiceImpl<UmsUserMapper, UmsUser> impl
         }
         return result;
     }
+
+    @Override
+    public Map<String, Object> customerLogin(String username, String password) throws Exception {
+        QueryWrapper<UmsUser> wrapper = new QueryWrapper<>();
+        wrapper.eq("login_name", username);
+        UmsUser user = this.getOne(wrapper);
+        if (user == null) {
+            throw new Exception("用户不存在");
+        }
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new Exception("密码错误");
+        }
+        if (user.getActive() == 0) {
+            throw new Exception("该用户已失效");
+        }
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("token", user);
+//        userInfo.put("username",user.getLoginName());
+//        userInfo.put("userIcon",user.getIcon());
+//
+//        String token = JWT.create().withClaim("userInfo", userInfo)
+//                .sign(Algorithm.HMAC256("guorui"));
+//
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("token", token);
+        return userInfo;
+    }
 }

@@ -8,11 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="pojo" />
-        <module name="admin" />
-        <module name="generator" />
         <module name="bus" />
         <module name="product" />
+        <module name="admin" />
+        <module name="generator" />
         <module name="gateway" />
+        <module name="cart" />
       </profile>
     </annotationProcessing>
   </component>
