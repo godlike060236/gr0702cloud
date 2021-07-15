@@ -55,7 +55,12 @@ public class PmsProductController {
 
     @GetMapping("/list")
     ResultJson list(Integer pageNo, Integer pageSize, String name) {
-        return ResultJson.success(productService.page(pageNo, pageSize, name));
+        return ResultJson.success(productService.page(pageNo, pageSize, name),"加载数据成功");
+    }
+
+    @GetMapping("/listByCategory")
+    ResultJson listByCategory(Integer pageNo, Integer pageSize, String categoryId) {
+        return ResultJson.success(productService.pageByCategory(pageNo, pageSize, categoryId),"加载数据成功");
     }
 
     @GetMapping("/getData")

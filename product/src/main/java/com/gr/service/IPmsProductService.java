@@ -14,5 +14,5 @@ import com.gr.pojo.PmsProduct;
  */
 public interface IPmsProductService extends IService<PmsProduct> {
     IPage<PmsProduct> page(Integer pageNo, Integer pageSize, String name);
-
+    IPage<PmsProduct> pageByCategory(Integer pageNo, Integer pageSize, String categoryId);
 }

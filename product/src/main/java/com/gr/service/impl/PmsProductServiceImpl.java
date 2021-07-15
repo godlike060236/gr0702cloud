@@ -29,4 +29,13 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
         }
         return this.page(new Page<>(pageNo, pageSize), wrapper);
     }
+
+    @Override
+    public IPage<PmsProduct> pageByCategory(Integer pageNo, Integer pageSize, String categoryId) {
+        QueryWrapper<PmsProduct> wrapper = new QueryWrapper<>();
+        if (StringUtils.isNotBlank(categoryId)) {
+            wrapper.like("category_id", categoryId);
+        }
+        return this.page(new Page<>(pageNo, pageSize), wrapper);
+    }
 }

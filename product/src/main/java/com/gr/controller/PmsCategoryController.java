@@ -30,6 +30,11 @@ public class PmsCategoryController {
         return ResultJson.success(categoryService.getByParentId(0L));
     }
 
+    @GetMapping("/getListById")
+    ResultJson list(Long id) {
+        return ResultJson.success(categoryService.getAll(id));
+    }
+
     @PostMapping("/add")
     ResultJson add(PmsCategory pmsCategory) {
         return ResultJson.success(categoryService.save(pmsCategory), "添加分类成功");
