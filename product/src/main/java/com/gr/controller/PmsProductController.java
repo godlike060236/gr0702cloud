@@ -2,6 +2,7 @@ package com.gr.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.gr.config.ProductConfig;
 import com.gr.pojo.PmsProduct;
 import com.gr.pojo.PmsSkuValue;
 import com.gr.pojo.PmsSpuValue;
@@ -18,10 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -52,15 +50,12 @@ public class PmsProductController {
     IPmsSkuValueService skuValueService;
     @Resource
     IPmsStockService stockService;
+    @Resource
+    ProductConfig productConfig;
 
     @GetMapping("/list")
-    ResultJson list(Integer pageNo, Integer pageSize, String name) {
-        return ResultJson.success(productService.page(pageNo, pageSize, name),"加载数据成功");
-    }
-
-    @GetMapping("/listByCategory")
-    ResultJson listByCategory(Integer pageNo, Integer pageSize, String categoryId) {
-        return ResultJson.success(productService.pageByCategory(pageNo, pageSize, categoryId),"加载数据成功");
+    ResultJson list(Integer pageNo, Integer pageSize, String name, String categoryId, String keyWord) {
+        return ResultJson.success(productService.page(pageNo, pageSize, name, categoryId, keyWord), "加载数据成功");
     }
 
     @GetMapping("/getData")
@@ -119,4 +114,17 @@ public class PmsProductController {
     ResultJson getone(Long id) {
         return ResultJson.success(productService.getById(id));
     }
+
+    @GetMapping("/getHotWords")
+    ResultJson getHotWords() {
+        List<PmsProduct> list = productService.getKeyWords();
+        List<String> keyWords = new ArrayList<>();
+        for (PmsProduct product : list) {
+            String[] words = product.getKeywords().split(" ");
+            keyWords.addAll(Arrays.asList(words));
+        }
+        String[] temp = keyWords.toArray(new String[0]);
+        return ResultJson.success(productConfig.getHotWords(temp));
+    }
+
 }
