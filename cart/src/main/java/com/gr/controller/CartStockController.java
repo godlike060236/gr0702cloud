@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author dongyuchen
@@ -24,23 +24,32 @@ import javax.annotation.Resource;
 public class CartStockController {
     @Resource
     ICartStockService cartStockService;
+
     @GetMapping("/list")
     ResultJson list(Long skuId) {
         return ResultJson.success(cartStockService.list());
     }
+
     @PostMapping("/update")
     ResultJson update(CartStock cartStock) {
-        return ResultJson.success(cartStockService.updateById(cartStock),"修改sku成功");
+        return ResultJson.success(cartStockService.updateById(cartStock), "修改成功");
     }
+
+    @PostMapping("/add")
+    ResultJson add(CartStock cartStock) {
+        Long productId = cartStock.getProductId();
+        Long skuId = cartStock.getSkuId();
+        return ResultJson.success(cartStockService.saveBySku(cartStock, productId, skuId), "添加成功");
+    }
+
     @GetMapping("/getone")
     ResultJson getone(Long id) {
         return ResultJson.success(cartStockService.getById(id));
     }
+
     @PostMapping("/del")
     ResultJson del(Long id) {
         System.out.println(id);
-        return ResultJson.success(cartStockService.removeById(id),"删除成功");
+        return ResultJson.success(cartStockService.removeById(id), "删除成功");
     }
-
-
 }

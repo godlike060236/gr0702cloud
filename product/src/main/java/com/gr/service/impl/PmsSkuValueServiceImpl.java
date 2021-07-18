@@ -1,10 +1,13 @@
 package com.gr.service.impl;
 
-import com.gr.pojo.PmsSkuValue;
-import com.gr.mapper.PmsSkuValueMapper;
-import com.gr.service.IPmsSkuValueService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gr.mapper.PmsSkuValueMapper;
+import com.gr.pojo.PmsSkuValue;
+import com.gr.service.IPmsSkuValueService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +19,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PmsSkuValueServiceImpl extends ServiceImpl<PmsSkuValueMapper, PmsSkuValue> implements IPmsSkuValueService {
-
+    @Override
+    public List<PmsSkuValue> list(Long productId) {
+        QueryWrapper<PmsSkuValue> wrapper = new QueryWrapper<>();
+        wrapper.eq("product_id", productId);
+        return this.list(wrapper);
+    }
 }

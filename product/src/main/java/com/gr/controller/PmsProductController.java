@@ -112,7 +112,7 @@ public class PmsProductController {
 
     @GetMapping("/getone")
     ResultJson getone(Long id) {
-        return ResultJson.success(productService.getById(id));
+        return ResultJson.success(productService.getById(id),"加载数据成功");
     }
 
     @GetMapping("/getHotWords")

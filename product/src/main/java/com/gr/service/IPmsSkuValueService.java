@@ -1,7 +1,9 @@
 package com.gr.service;
 
-import com.gr.pojo.PmsSkuValue;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gr.pojo.PmsSkuValue;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-07-10
  */
 public interface IPmsSkuValueService extends IService<PmsSkuValue> {
-
+    List<PmsSkuValue> list(Long productId);
 }

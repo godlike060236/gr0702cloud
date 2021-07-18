@@ -23,7 +23,7 @@ public class MybatisGenerator {
         // 定义pojo路径
         String pojoPath = projectPath + "/pojo";
         // 定义其他项目路径
-        String otherPath = projectPath + "/cart";
+        // String otherPath = projectPath + "/cart";
         gc.setAuthor("guorui");
         mpg.setGlobalConfig(gc);
         // 数据源配置

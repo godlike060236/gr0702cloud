@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author guorui
- * @since 2021-07-14
+ * @since 2021-07-17
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -19,7 +19,7 @@ public class CartStock extends BasePojo {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 商品id
+     * 商品sku_id
      */
     private Long skuId;
 
@@ -47,6 +47,11 @@ public class CartStock extends BasePojo {
      * 商品图
      */
     private String icon;
+
+    /**
+     * 商品id
+     */
+    private Long productId;
 
 
 }

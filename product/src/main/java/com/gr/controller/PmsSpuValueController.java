@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-07-10
  */
 @RestController
-@RequestMapping("//pms-spu-value")
+@RequestMapping("/pms-spu-value")
 public class PmsSpuValueController {
 
 }
