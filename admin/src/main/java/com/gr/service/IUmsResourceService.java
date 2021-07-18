@@ -1,7 +1,7 @@
 package com.gr.service;
 
-import com.gr.pojo.UmsResource;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gr.pojo.UmsResource;
 
 import java.util.List;
 
@@ -15,6 +15,8 @@ import java.util.List;
  */
 public interface IUmsResourceService extends IService<UmsResource> {
     List<UmsResource> getResource(Long parentId);
+
     List<Long> getLast();
+
     List<UmsResource> getByUserId(Long userId);
 }

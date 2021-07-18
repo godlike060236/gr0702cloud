@@ -1,7 +1,7 @@
 package com.gr.service;
 
-import com.gr.pojo.UmsRoleUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gr.pojo.UmsRoleUser;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import java.util.List;
  * @since 2021-07-05
  */
 public interface IUmsRoleUserService extends IService<UmsRoleUser> {
-    boolean save(Long roleId,Long[] userIds);
+    boolean save(Long roleId, Long[] userIds);
+
     List<UmsRoleUser> getUsersByRoleId(Long id);
 }

@@ -17,7 +17,10 @@ import java.util.Map;
  */
 public interface IUmsUserService extends IService<UmsUser> {
     IPage<UmsUser> page(Integer pageNo, Integer pageSize, String name);
+
     List<UmsUser> getAll();
-    Map<String,Object> login(String username, String password) throws Exception;
-    Map<String,Object> customerLogin(String username, String password) throws Exception;
+
+    Map<String, Object> login(String username, String password) throws Exception;
+
+    Map<String, Object> customerLogin(String username, String password) throws Exception;
 }

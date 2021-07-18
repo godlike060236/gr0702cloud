@@ -58,13 +58,13 @@ public class UmsUserServiceImpl extends ServiceImpl<UmsUserMapper, UmsUser> impl
         wrapper.eq("login_name", username);
         UmsUser user = this.getOne(wrapper);
         if (user == null) {
-            throw new Exception("用户名或密码错误");
+            throw new Exception("用户不存在");
         }
         if (user.getActive() == 0) {
             throw new Exception("该用户已失效");
         }
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new Exception("用户名或密码错误");
+            throw new Exception("密码错误");
         }
         // 如果登录成功，需要获取到用户权限
         List<UmsResource> resources = resourceService.getByUserId(user.getId());
@@ -72,10 +72,37 @@ public class UmsUserServiceImpl extends ServiceImpl<UmsUserMapper, UmsUser> impl
         Map<String, Object> result = new HashMap<>();
         result.put("frontUrl", split.get("frontUrl"));
         String token = JWT.create().withClaim("username", username)
-                .withClaim("backUrl", (List<String>)split.get("backUrl"))
+                .withClaim("backUrl", (List<String>) split.get("backUrl"))
                 .sign(Algorithm.HMAC256("guorui"));
         result.put("token", token);
         return result;
+    }
+
+    @Override
+    public Map<String, Object> customerLogin(String username, String password) throws Exception {
+        QueryWrapper<UmsUser> wrapper = new QueryWrapper<>();
+        wrapper.eq("login_name", username);
+        UmsUser user = this.getOne(wrapper);
+        if (user == null) {
+            throw new Exception("用户不存在");
+        }
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new Exception("密码错误");
+        }
+        if (user.getActive() == 0) {
+            throw new Exception("该用户已失效");
+        }
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("token", user.getId());
+//        userInfo.put("username",user.getLoginName());
+//        userInfo.put("userIcon",user.getIcon());
+//
+//        String token = JWT.create().withClaim("userInfo", userInfo)
+//                .sign(Algorithm.HMAC256("guorui"));
+//
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("token", token);
+        return userInfo;
     }
 
     private Map<String, Object> split(List<UmsResource> resources) {
@@ -101,32 +128,5 @@ public class UmsUserServiceImpl extends ServiceImpl<UmsUserMapper, UmsUser> impl
             }
         }
         return result;
-    }
-
-    @Override
-    public Map<String, Object> customerLogin(String username, String password) throws Exception {
-        QueryWrapper<UmsUser> wrapper = new QueryWrapper<>();
-        wrapper.eq("login_name", username);
-        UmsUser user = this.getOne(wrapper);
-        if (user == null) {
-            throw new Exception("用户不存在");
-        }
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new Exception("密码错误");
-        }
-        if (user.getActive() == 0) {
-            throw new Exception("该用户已失效");
-        }
-        Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("token", user);
-//        userInfo.put("username",user.getLoginName());
-//        userInfo.put("userIcon",user.getIcon());
-//
-//        String token = JWT.create().withClaim("userInfo", userInfo)
-//                .sign(Algorithm.HMAC256("guorui"));
-//
-//        Map<String, Object> result = new HashMap<>();
-//        result.put("token", token);
-        return userInfo;
     }
 }
