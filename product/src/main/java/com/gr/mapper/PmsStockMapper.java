@@ -12,5 +12,4 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2021-07-10
  */
 public interface PmsStockMapper extends BaseMapper<PmsStock> {
-
 }

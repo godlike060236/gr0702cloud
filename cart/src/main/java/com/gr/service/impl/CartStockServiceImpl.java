@@ -21,17 +21,24 @@ import java.util.List;
 @Service
 public class CartStockServiceImpl extends ServiceImpl<CartStockMapper, CartStock> implements ICartStockService {
     @Override
-    public List<CartStock> list(Long skuId) {
+    public List<CartStock> list(Long active) {
         QueryWrapper<CartStock> wrapper = new QueryWrapper<CartStock>();
-        wrapper.eq("sku_id", skuId);
+        wrapper.eq("active", active);
+        return this.list(wrapper);
+    }
+
+    @Override
+    public List<CartStock> getListByCartStockId(Long active, Long cartStockId) {
+        QueryWrapper<CartStock> wrapper = new QueryWrapper<CartStock>();
+        wrapper.eq("active", active).eq("id", cartStockId);
         return this.list(wrapper);
     }
 
     @Override
     public CartStock saveBySku(CartStock cartStock, Long productId, Long skuId) {
         UpdateWrapper<CartStock> wrapper = new UpdateWrapper<CartStock>();
-        wrapper.eq("product_id", productId).eq("sku_id", skuId);
-        if (this.list(wrapper) == null) {
+        wrapper.eq("product_id", productId).eq("sku_id", skuId).eq("active", 1);
+        if (this.list(wrapper).size() == 0) {
             this.save(cartStock);
         } else {
             Long number = this.list(wrapper).get(0).getNumber() + cartStock.getNumber();
@@ -40,4 +47,20 @@ public class CartStockServiceImpl extends ServiceImpl<CartStockMapper, CartStock
         }
         return cartStock;
     }
+
+    @Override
+    public boolean del(Long cartStockId) {
+        UpdateWrapper<CartStock> wrapper = new UpdateWrapper<CartStock>();
+        wrapper.set("active", 0).eq("id", cartStockId);
+        return this.update(wrapper);
+    }
+
+    @Override
+    public boolean updateStock(Long cartStockId, Integer stock) {
+        UpdateWrapper<CartStock> wrapper = new UpdateWrapper<CartStock>();
+        wrapper.set("stock", stock).eq("id", cartStockId);
+        return this.update(wrapper);
+    }
+
+
 }

@@ -26,13 +26,23 @@ public class CartStockController {
     ICartStockService cartStockService;
 
     @GetMapping("/list")
-    ResultJson list(Long skuId) {
-        return ResultJson.success(cartStockService.list());
+    ResultJson list(Long active, Long cartStockId) {
+        return ResultJson.success(cartStockService.list(active));
+    }
+
+    @GetMapping("/getListByCartStockId")
+    ResultJson getListByCartStockId(Long active, Long cartStockId) {
+        return ResultJson.success(cartStockService.getListByCartStockId(active, cartStockId));
     }
 
     @PostMapping("/update")
     ResultJson update(CartStock cartStock) {
         return ResultJson.success(cartStockService.updateById(cartStock), "修改成功");
+    }
+
+    @PostMapping("/updateStock")
+    ResultJson updateStock(Long cartStockId, Integer stock) {
+        return ResultJson.success(cartStockService.updateStock(cartStockId, stock), "修改成功");
     }
 
     @PostMapping("/add")
@@ -48,8 +58,7 @@ public class CartStockController {
     }
 
     @PostMapping("/del")
-    ResultJson del(Long id) {
-        System.out.println(id);
-        return ResultJson.success(cartStockService.removeById(id), "删除成功");
+    ResultJson del(Long cartStock) {
+        return ResultJson.success(cartStockService.del(cartStock), "删除成功");
     }
 }

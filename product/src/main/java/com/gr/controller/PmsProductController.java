@@ -2,6 +2,7 @@ package com.gr.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gr.config.ProductConfig;
 import com.gr.pojo.PmsProduct;
 import com.gr.pojo.PmsSkuValue;
@@ -53,9 +54,20 @@ public class PmsProductController {
     @Resource
     ProductConfig productConfig;
 
+    @GetMapping("/backList")
+    ResultJson backList(Integer pageNo, Integer pageSize) {
+        return ResultJson.success(productService.page(new Page<>(pageNo,pageSize)), "加载数据成功");
+    }
+
     @GetMapping("/list")
     ResultJson list(Integer pageNo, Integer pageSize, String name, String categoryId, String keyWord) {
-        return ResultJson.success(productService.page(pageNo, pageSize, name, categoryId, keyWord), "加载数据成功");
+        return ResultJson.success(productService.page1(pageNo, pageSize, name, categoryId, keyWord), "加载数据成功");
+    }
+
+    @PostMapping("/publish")
+    ResultJson publish(PmsProduct pmsProduct) {
+        String message = pmsProduct.getPublishStatus() == 1 ? "商品上架成功" : "商品下架成功";
+        return ResultJson.success(productService.updateById(pmsProduct),message);
     }
 
     @GetMapping("/getData")

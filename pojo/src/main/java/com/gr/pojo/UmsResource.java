@@ -51,6 +51,11 @@ public class UmsResource extends BasePojo {
     private Integer haschildren;
 
     /**
+     * 是否有效
+     */
+    private Integer active;
+
+    /**
      * 定义子集
      */
     @TableField(exist = false)

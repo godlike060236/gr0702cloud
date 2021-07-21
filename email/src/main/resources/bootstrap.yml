@@ -1,12 +1,10 @@
 server:
-  port: 8084
+  port: 8087
 spring:
-  main:
-    allow-bean-definition-overriding: true
   application:
-    name: admin
+    name: email
   profiles:
-    active: datasource,regist,mybatis,minio,mq
+    active: email,mq
   cloud:
     nacos:
       config:

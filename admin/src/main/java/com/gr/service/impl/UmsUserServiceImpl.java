@@ -3,6 +3,7 @@ package com.gr.service.impl;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -103,6 +104,21 @@ public class UmsUserServiceImpl extends ServiceImpl<UmsUserMapper, UmsUser> impl
 //        Map<String, Object> result = new HashMap<>();
 //        result.put("token", token);
         return userInfo;
+    }
+
+    @Override
+    public boolean changePassword(String username, String rawPassword) {
+        UpdateWrapper<UmsUser> wrapper = new UpdateWrapper<>();
+        wrapper.set("password", rawPassword).eq("login_name", username);
+        return this.update(wrapper);
+    }
+
+    @Override
+    public boolean getTheUser(UmsUser user) throws Exception {
+        QueryWrapper<UmsUser> wrapper = new QueryWrapper<>();
+        wrapper.eq("login_name", user.getLoginName()).eq("email", user.getEmail()).eq("active", 1);
+        UmsUser result = this.getOne(wrapper);
+        return result != null;
     }
 
     private Map<String, Object> split(List<UmsResource> resources) {

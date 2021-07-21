@@ -1,12 +1,11 @@
 package com.gr.pojo;
 
-import com.gr.pojo.BasePojo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author guorui
@@ -53,5 +52,9 @@ public class CartStock extends BasePojo {
      */
     private Long productId;
 
+    /**
+     * 是否有效
+     */
+    private Integer active;
 
 }

@@ -14,6 +14,13 @@ import java.util.List;
  * @since 2021-07-12
  */
 public interface ICartStockService extends IService<CartStock> {
-    List<CartStock> list(Long skuId);
+    List<CartStock> list(Long active);
+
+    List<CartStock> getListByCartStockId(Long active, Long cartStockId);
+
     CartStock saveBySku(CartStock cartStock, Long productId, Long skuId);
+
+    boolean del(Long cartStockId);
+
+    boolean updateStock(Long cartStockId, Integer stock);
 }

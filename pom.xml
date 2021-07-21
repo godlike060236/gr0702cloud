@@ -15,6 +15,7 @@
         <module>bus</module>
         <module>gateway</module>
         <module>cart</module>
+        <module>email</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -107,6 +108,16 @@
             <dependency>
                 <groupId>com.gr</groupId>
                 <artifactId>bus</artifactId>
+                <version>${gr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gr</groupId>
+                <artifactId>cart</artifactId>
+                <version>${gr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gr</groupId>
+                <artifactId>product</artifactId>
                 <version>${gr.version}</version>
             </dependency>
             <dependency>

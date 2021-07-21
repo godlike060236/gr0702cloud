@@ -23,7 +23,7 @@ public class MybatisGenerator {
         // 定义pojo路径
         String pojoPath = projectPath + "/pojo";
         // 定义其他项目路径
-        // String otherPath = projectPath + "/cart";
+        String otherPath = projectPath + "/admin";
         gc.setAuthor("guorui");
         mpg.setGlobalConfig(gc);
         // 数据源配置
@@ -43,12 +43,12 @@ public class MybatisGenerator {
         pc.setServiceImpl("service.impl");
         pc.setController("controller");
         Map<String, String> pathInfo = new HashMap<>();
-        //pathInfo.put("xml_path", otherPath + "/src/main/resources/com/gr/mapper");
+        pathInfo.put("xml_path", otherPath + "/src/main/resources/com/gr/mapper");
         pathInfo.put("entity_path", pojoPath + "/src/main/java/com/gr/pojo");
-        //pathInfo.put("mapper_path", otherPath + "/src/main/java/com/gr/mapper");
-        //pathInfo.put("service_path", otherPath + "/src/main/java/com/gr/service");
-        //pathInfo.put("service_impl_path", otherPath + "/src/main/java/com/gr/service/impl");
-        //pathInfo.put("controller_path", otherPath + "/src/main/java/com/gr/controller");
+        pathInfo.put("mapper_path", otherPath + "/src/main/java/com/gr/mapper");
+        pathInfo.put("service_path", otherPath + "/src/main/java/com/gr/service");
+        pathInfo.put("service_impl_path", otherPath + "/src/main/java/com/gr/service/impl");
+        pathInfo.put("controller_path", otherPath + "/src/main/java/com/gr/controller");
         pc.setPathInfo(pathInfo);
         mpg.setPackageInfo(pc);
 
@@ -62,7 +62,7 @@ public class MybatisGenerator {
         // 公共父类
         // 写于父类中的公共字段
         strategy.setSuperEntityColumns("id");
-        strategy.setInclude("ums_address");
+        strategy.setInclude("ums_history");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

@@ -24,24 +24,35 @@ public class UmsResourceServiceImpl extends ServiceImpl<UmsResourceMapper, UmsRe
     @Resource
     UmsResourceMapper resourceMapper;
 
-    @Override
-    public List<UmsResource> getResource(Long parentId) {
+    public List<UmsResource> getResource(Long parentId, Integer active) {
         QueryWrapper<UmsResource> wrapper = new QueryWrapper<>();
-        wrapper.eq("parent_id", parentId);
+        wrapper.eq("parent_id",parentId);
+        if (active != null) {
+            wrapper.eq("active", active);
+        }
         List<UmsResource> list = this.list(wrapper);
-        for (UmsResource resource : list) {
-            resource.setChildren(getResource(resource.getId()));
+        for(UmsResource resource : list) {
+            if (resource.getActive() == 1) {
+                resource.setChildren(getResource(resource.getId()));
+            }
         }
         return list;
     }
 
     @Override
+    public List<UmsResource> getResource(Long parentId) {
+        return this.getResource(parentId, null);
+    }
+
+    @Override
     public List<Long> getLast() {
         QueryWrapper<UmsResource> wrapper = new QueryWrapper<>();
-        wrapper.eq("haschildren", 0);
+        wrapper.eq("haschildren",0);
         List<UmsResource> list = this.list(wrapper);
         List<Long> result = new ArrayList<>();
-        list.forEach(umsResource -> result.add(umsResource.getId()));
+        list.forEach(umsResource -> {
+            result.add(umsResource.getId());
+        });
         return result;
     }
 

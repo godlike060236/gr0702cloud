@@ -1,7 +1,7 @@
 package com.gr.service;
 
-import com.gr.pojo.PmsStock;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gr.pojo.PmsStock;
 
 import java.util.List;
 
@@ -15,4 +15,7 @@ import java.util.List;
  */
 public interface IPmsStockService extends IService<PmsStock> {
     List<PmsStock> list(Long productId);
+
+    boolean updateStock(Long id, Long productId, Integer stock);
+
 }

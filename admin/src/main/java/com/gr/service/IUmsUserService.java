@@ -23,4 +23,8 @@ public interface IUmsUserService extends IService<UmsUser> {
     Map<String, Object> login(String username, String password) throws Exception;
 
     Map<String, Object> customerLogin(String username, String password) throws Exception;
+
+    boolean changePassword(String username, String rawPassword);
+
+    boolean getTheUser(UmsUser user) throws Exception;
 }

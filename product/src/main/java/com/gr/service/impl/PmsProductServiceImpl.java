@@ -25,9 +25,9 @@ import java.util.List;
 public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProduct> implements IPmsProductService {
 
     @Override
-    public IPage<PmsProduct> page(Integer pageNo, Integer pageSize, String name, String categoryId, String keyWord) {
+    public IPage<PmsProduct> page1(Integer pageNo, Integer pageSize, String name, String categoryId, String keyWord) {
         QueryWrapper<PmsProduct> wrapper = new QueryWrapper<>();
-        if (StringUtils.isNotBlank(name)||StringUtils.isNotBlank(categoryId)||StringUtils.isNotBlank(keyWord)) {
+        if (StringUtils.isNotBlank(name) || StringUtils.isNotBlank(categoryId) || StringUtils.isNotBlank(keyWord)) {
             wrapper.like("name", name)
                     .like("category_id", categoryId)
                     .like("keywords", keyWord);

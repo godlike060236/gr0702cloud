@@ -1,6 +1,7 @@
 package com.gr.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.gr.pojo.PmsStock;
 import com.gr.mapper.PmsStockMapper;
 import com.gr.service.IPmsStockService;
@@ -24,5 +25,12 @@ public class PmsStockServiceImpl extends ServiceImpl<PmsStockMapper, PmsStock> i
         QueryWrapper<PmsStock> wrapper = new QueryWrapper<>();
         wrapper.eq("product_id",productId);
         return this.list(wrapper);
+    }
+
+    @Override
+    public boolean updateStock(Long id, Long productId, Integer stock) {
+        UpdateWrapper<PmsStock> wrapper = new UpdateWrapper<PmsStock>();
+        wrapper.set("stock", stock).eq("id", id).eq("product_id",productId);
+        return this.update(wrapper);
     }
 }

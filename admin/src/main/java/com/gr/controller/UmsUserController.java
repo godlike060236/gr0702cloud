@@ -83,4 +83,15 @@ public class UmsUserController {
     ResultJson customerLogin(String username,String password) throws Exception {
         return ResultJson.success(umsUserService.customerLogin(username,password),"登陆成功");
     }
+
+    @PostMapping("/changePassword")
+    ResultJson changePassword(String username, String rawPassword) {
+        String password = passwordEncoder.encode(rawPassword);
+        return ResultJson.success(umsUserService.changePassword(username, password), "修改密码成功");
+    }
+
+    @PostMapping("/getCode")
+    ResultJson getCode(UmsUser user) throws Exception {
+        return ResultJson.success(umsUserService.getTheUser(user), "发送成功");
+    }
 }
