@@ -29,7 +29,7 @@
         <mybatis.plus.version>3.3.2</mybatis.plus.version>
         <mybatis.plus.generator>3.3.2</mybatis.plus.generator>
         <freemarker.version>2.3.31</freemarker.version>
-        <mysql.version>5.1.47</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <minio.version>7.1.0</minio.version>
         <org.duracloud.version>6.0.0</org.duracloud.version>
         <gr.version>1.0-SNAPSHOT</gr.version>
